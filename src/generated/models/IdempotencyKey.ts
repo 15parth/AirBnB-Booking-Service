@@ -28,28 +28,30 @@ export type AggregateIdempotencyKey = {
 
 export type IdempotencyKeyAvgAggregateOutputType = {
   id: number | null
-  key: number | null
+  bookingId: number | null
 }
 
 export type IdempotencyKeySumAggregateOutputType = {
   id: number | null
-  key: number | null
+  bookingId: number | null
 }
 
 export type IdempotencyKeyMinAggregateOutputType = {
   id: number | null
-  key: number | null
+  key: string | null
   createdAt: Date | null
   updatedAt: Date | null
   finalized: boolean | null
+  bookingId: number | null
 }
 
 export type IdempotencyKeyMaxAggregateOutputType = {
   id: number | null
-  key: number | null
+  key: string | null
   createdAt: Date | null
   updatedAt: Date | null
   finalized: boolean | null
+  bookingId: number | null
 }
 
 export type IdempotencyKeyCountAggregateOutputType = {
@@ -58,18 +60,19 @@ export type IdempotencyKeyCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   finalized: number
+  bookingId: number
   _all: number
 }
 
 
 export type IdempotencyKeyAvgAggregateInputType = {
   id?: true
-  key?: true
+  bookingId?: true
 }
 
 export type IdempotencyKeySumAggregateInputType = {
   id?: true
-  key?: true
+  bookingId?: true
 }
 
 export type IdempotencyKeyMinAggregateInputType = {
@@ -78,6 +81,7 @@ export type IdempotencyKeyMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   finalized?: true
+  bookingId?: true
 }
 
 export type IdempotencyKeyMaxAggregateInputType = {
@@ -86,6 +90,7 @@ export type IdempotencyKeyMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   finalized?: true
+  bookingId?: true
 }
 
 export type IdempotencyKeyCountAggregateInputType = {
@@ -94,6 +99,7 @@ export type IdempotencyKeyCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   finalized?: true
+  bookingId?: true
   _all?: true
 }
 
@@ -185,10 +191,11 @@ export type IdempotencyKeyGroupByArgs<ExtArgs extends runtime.Types.Extensions.I
 
 export type IdempotencyKeyGroupByOutputType = {
   id: number
-  key: number
+  key: string
   createdAt: Date
   updatedAt: Date
   finalized: boolean | null
+  bookingId: number
   _count: IdempotencyKeyCountAggregateOutputType | null
   _avg: IdempotencyKeyAvgAggregateOutputType | null
   _sum: IdempotencyKeySumAggregateOutputType | null
@@ -216,10 +223,11 @@ export type IdempotencyKeyWhereInput = {
   OR?: Prisma.IdempotencyKeyWhereInput[]
   NOT?: Prisma.IdempotencyKeyWhereInput | Prisma.IdempotencyKeyWhereInput[]
   id?: Prisma.IntFilter<"IdempotencyKey"> | number
-  key?: Prisma.IntFilter<"IdempotencyKey"> | number
+  key?: Prisma.StringFilter<"IdempotencyKey"> | string
   createdAt?: Prisma.DateTimeFilter<"IdempotencyKey"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"IdempotencyKey"> | Date | string
   finalized?: Prisma.BoolNullableFilter<"IdempotencyKey"> | boolean | null
+  bookingId?: Prisma.IntFilter<"IdempotencyKey"> | number
   booking?: Prisma.XOR<Prisma.BookingNullableScalarRelationFilter, Prisma.BookingWhereInput> | null
 }
 
@@ -229,12 +237,15 @@ export type IdempotencyKeyOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   finalized?: Prisma.SortOrderInput | Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
   booking?: Prisma.BookingOrderByWithRelationInput
+  _relevance?: Prisma.IdempotencyKeyOrderByRelevanceInput
 }
 
 export type IdempotencyKeyWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  key?: number
+  key?: string
+  bookingId?: number
   AND?: Prisma.IdempotencyKeyWhereInput | Prisma.IdempotencyKeyWhereInput[]
   OR?: Prisma.IdempotencyKeyWhereInput[]
   NOT?: Prisma.IdempotencyKeyWhereInput | Prisma.IdempotencyKeyWhereInput[]
@@ -242,7 +253,7 @@ export type IdempotencyKeyWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"IdempotencyKey"> | Date | string
   finalized?: Prisma.BoolNullableFilter<"IdempotencyKey"> | boolean | null
   booking?: Prisma.XOR<Prisma.BookingNullableScalarRelationFilter, Prisma.BookingWhereInput> | null
-}, "id" | "key">
+}, "id" | "key" | "bookingId">
 
 export type IdempotencyKeyOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -250,6 +261,7 @@ export type IdempotencyKeyOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   finalized?: Prisma.SortOrderInput | Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
   _count?: Prisma.IdempotencyKeyCountOrderByAggregateInput
   _avg?: Prisma.IdempotencyKeyAvgOrderByAggregateInput
   _max?: Prisma.IdempotencyKeyMaxOrderByAggregateInput
@@ -262,14 +274,15 @@ export type IdempotencyKeyScalarWhereWithAggregatesInput = {
   OR?: Prisma.IdempotencyKeyScalarWhereWithAggregatesInput[]
   NOT?: Prisma.IdempotencyKeyScalarWhereWithAggregatesInput | Prisma.IdempotencyKeyScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"IdempotencyKey"> | number
-  key?: Prisma.IntWithAggregatesFilter<"IdempotencyKey"> | number
+  key?: Prisma.StringWithAggregatesFilter<"IdempotencyKey"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"IdempotencyKey"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"IdempotencyKey"> | Date | string
   finalized?: Prisma.BoolNullableWithAggregatesFilter<"IdempotencyKey"> | boolean | null
+  bookingId?: Prisma.IntWithAggregatesFilter<"IdempotencyKey"> | number
 }
 
 export type IdempotencyKeyCreateInput = {
-  key: number
+  key: string
   createdAt?: Date | string
   updatedAt?: Date | string
   finalized?: boolean | null
@@ -278,15 +291,15 @@ export type IdempotencyKeyCreateInput = {
 
 export type IdempotencyKeyUncheckedCreateInput = {
   id?: number
-  key: number
+  key: string
   createdAt?: Date | string
   updatedAt?: Date | string
   finalized?: boolean | null
-  booking?: Prisma.BookingUncheckedCreateNestedOneWithoutIdempotencyKeyInput
+  bookingId: number
 }
 
 export type IdempotencyKeyUpdateInput = {
-  key?: Prisma.IntFieldUpdateOperationsInput | number
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   finalized?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -295,23 +308,24 @@ export type IdempotencyKeyUpdateInput = {
 
 export type IdempotencyKeyUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  key?: Prisma.IntFieldUpdateOperationsInput | number
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   finalized?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
-  booking?: Prisma.BookingUncheckedUpdateOneWithoutIdempotencyKeyNestedInput
+  bookingId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type IdempotencyKeyCreateManyInput = {
   id?: number
-  key: number
+  key: string
   createdAt?: Date | string
   updatedAt?: Date | string
   finalized?: boolean | null
+  bookingId: number
 }
 
 export type IdempotencyKeyUpdateManyMutationInput = {
-  key?: Prisma.IntFieldUpdateOperationsInput | number
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   finalized?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -319,15 +333,22 @@ export type IdempotencyKeyUpdateManyMutationInput = {
 
 export type IdempotencyKeyUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  key?: Prisma.IntFieldUpdateOperationsInput | number
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   finalized?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  bookingId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type IdempotencyKeyNullableScalarRelationFilter = {
   is?: Prisma.IdempotencyKeyWhereInput | null
   isNot?: Prisma.IdempotencyKeyWhereInput | null
+}
+
+export type IdempotencyKeyOrderByRelevanceInput = {
+  fields: Prisma.IdempotencyKeyOrderByRelevanceFieldEnum | Prisma.IdempotencyKeyOrderByRelevanceFieldEnum[]
+  sort: Prisma.SortOrder
+  search: string
 }
 
 export type IdempotencyKeyCountOrderByAggregateInput = {
@@ -336,11 +357,12 @@ export type IdempotencyKeyCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   finalized?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
 }
 
 export type IdempotencyKeyAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  key?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
 }
 
 export type IdempotencyKeyMaxOrderByAggregateInput = {
@@ -349,6 +371,7 @@ export type IdempotencyKeyMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   finalized?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
 }
 
 export type IdempotencyKeyMinOrderByAggregateInput = {
@@ -357,14 +380,21 @@ export type IdempotencyKeyMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   finalized?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
 }
 
 export type IdempotencyKeySumOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  key?: Prisma.SortOrder
+  bookingId?: Prisma.SortOrder
 }
 
 export type IdempotencyKeyCreateNestedOneWithoutBookingInput = {
+  create?: Prisma.XOR<Prisma.IdempotencyKeyCreateWithoutBookingInput, Prisma.IdempotencyKeyUncheckedCreateWithoutBookingInput>
+  connectOrCreate?: Prisma.IdempotencyKeyCreateOrConnectWithoutBookingInput
+  connect?: Prisma.IdempotencyKeyWhereUniqueInput
+}
+
+export type IdempotencyKeyUncheckedCreateNestedOneWithoutBookingInput = {
   create?: Prisma.XOR<Prisma.IdempotencyKeyCreateWithoutBookingInput, Prisma.IdempotencyKeyUncheckedCreateWithoutBookingInput>
   connectOrCreate?: Prisma.IdempotencyKeyCreateOrConnectWithoutBookingInput
   connect?: Prisma.IdempotencyKeyWhereUniqueInput
@@ -380,12 +410,26 @@ export type IdempotencyKeyUpdateOneWithoutBookingNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.IdempotencyKeyUpdateToOneWithWhereWithoutBookingInput, Prisma.IdempotencyKeyUpdateWithoutBookingInput>, Prisma.IdempotencyKeyUncheckedUpdateWithoutBookingInput>
 }
 
+export type IdempotencyKeyUncheckedUpdateOneWithoutBookingNestedInput = {
+  create?: Prisma.XOR<Prisma.IdempotencyKeyCreateWithoutBookingInput, Prisma.IdempotencyKeyUncheckedCreateWithoutBookingInput>
+  connectOrCreate?: Prisma.IdempotencyKeyCreateOrConnectWithoutBookingInput
+  upsert?: Prisma.IdempotencyKeyUpsertWithoutBookingInput
+  disconnect?: Prisma.IdempotencyKeyWhereInput | boolean
+  delete?: Prisma.IdempotencyKeyWhereInput | boolean
+  connect?: Prisma.IdempotencyKeyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.IdempotencyKeyUpdateToOneWithWhereWithoutBookingInput, Prisma.IdempotencyKeyUpdateWithoutBookingInput>, Prisma.IdempotencyKeyUncheckedUpdateWithoutBookingInput>
+}
+
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
 export type NullableBoolFieldUpdateOperationsInput = {
   set?: boolean | null
 }
 
 export type IdempotencyKeyCreateWithoutBookingInput = {
-  key: number
+  key: string
   createdAt?: Date | string
   updatedAt?: Date | string
   finalized?: boolean | null
@@ -393,7 +437,7 @@ export type IdempotencyKeyCreateWithoutBookingInput = {
 
 export type IdempotencyKeyUncheckedCreateWithoutBookingInput = {
   id?: number
-  key: number
+  key: string
   createdAt?: Date | string
   updatedAt?: Date | string
   finalized?: boolean | null
@@ -416,7 +460,7 @@ export type IdempotencyKeyUpdateToOneWithWhereWithoutBookingInput = {
 }
 
 export type IdempotencyKeyUpdateWithoutBookingInput = {
-  key?: Prisma.IntFieldUpdateOperationsInput | number
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   finalized?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -424,7 +468,7 @@ export type IdempotencyKeyUpdateWithoutBookingInput = {
 
 export type IdempotencyKeyUncheckedUpdateWithoutBookingInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  key?: Prisma.IntFieldUpdateOperationsInput | number
+  key?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   finalized?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -438,6 +482,7 @@ export type IdempotencyKeySelect<ExtArgs extends runtime.Types.Extensions.Intern
   createdAt?: boolean
   updatedAt?: boolean
   finalized?: boolean
+  bookingId?: boolean
   booking?: boolean | Prisma.IdempotencyKey$bookingArgs<ExtArgs>
 }, ExtArgs["result"]["idempotencyKey"]>
 
@@ -449,9 +494,10 @@ export type IdempotencyKeySelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   finalized?: boolean
+  bookingId?: boolean
 }
 
-export type IdempotencyKeyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "createdAt" | "updatedAt" | "finalized", ExtArgs["result"]["idempotencyKey"]>
+export type IdempotencyKeyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "key" | "createdAt" | "updatedAt" | "finalized" | "bookingId", ExtArgs["result"]["idempotencyKey"]>
 export type IdempotencyKeyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   booking?: boolean | Prisma.IdempotencyKey$bookingArgs<ExtArgs>
 }
@@ -463,10 +509,11 @@ export type $IdempotencyKeyPayload<ExtArgs extends runtime.Types.Extensions.Inte
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    key: number
+    key: string
     createdAt: Date
     updatedAt: Date
     finalized: boolean | null
+    bookingId: number
   }, ExtArgs["result"]["idempotencyKey"]>
   composites: {}
 }
@@ -838,10 +885,11 @@ export interface Prisma__IdempotencyKeyClient<T, Null = never, ExtArgs extends r
  */
 export interface IdempotencyKeyFieldRefs {
   readonly id: Prisma.FieldRef<"IdempotencyKey", 'Int'>
-  readonly key: Prisma.FieldRef<"IdempotencyKey", 'Int'>
+  readonly key: Prisma.FieldRef<"IdempotencyKey", 'String'>
   readonly createdAt: Prisma.FieldRef<"IdempotencyKey", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"IdempotencyKey", 'DateTime'>
   readonly finalized: Prisma.FieldRef<"IdempotencyKey", 'Boolean'>
+  readonly bookingId: Prisma.FieldRef<"IdempotencyKey", 'Int'>
 }
     
 

@@ -17,11 +17,12 @@ model Booking {
   status           BookingStatus   @default(PENDING)
   idempotencyKeyId Int?            @unique
   idempotencyKey   IdempotencyKey?
+  totalGuest       Int 
 }
 
 model IdempotencyKey {
   id        Int      @id @default(autoincrement())
-  key       Int      @unique
+  key       String      @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   finalized Boolean? @default(false) 
