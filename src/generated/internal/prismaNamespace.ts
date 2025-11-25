@@ -584,7 +584,8 @@ export const BookingScalarFieldEnum = {
   updatedAt: 'updatedAt',
   bookingAmount: 'bookingAmount',
   status: 'status',
-  idempotencyKeyId: 'idempotencyKeyId'
+  idempotencyKeyId: 'idempotencyKeyId',
+  totalGuest: 'totalGuest'
 } as const
 
 export type BookingScalarFieldEnum = (typeof BookingScalarFieldEnum)[keyof typeof BookingScalarFieldEnum]
@@ -595,7 +596,8 @@ export const IdempotencyKeyScalarFieldEnum = {
   key: 'key',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  finalized: 'finalized'
+  finalized: 'finalized',
+  bookingId: 'bookingId'
 } as const
 
 export type IdempotencyKeyScalarFieldEnum = (typeof IdempotencyKeyScalarFieldEnum)[keyof typeof IdempotencyKeyScalarFieldEnum]
@@ -615,6 +617,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const IdempotencyKeyOrderByRelevanceFieldEnum = {
+  key: 'key'
+} as const
+
+export type IdempotencyKeyOrderByRelevanceFieldEnum = (typeof IdempotencyKeyOrderByRelevanceFieldEnum)[keyof typeof IdempotencyKeyOrderByRelevanceFieldEnum]
 
 
 
@@ -641,6 +650,13 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'BookingStatus'
  */
 export type EnumBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'String'
+ */
+export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
     
 
 

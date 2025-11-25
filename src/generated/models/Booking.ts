@@ -32,6 +32,7 @@ export type BookingAvgAggregateOutputType = {
   hotelid: number | null
   bookingAmount: number | null
   idempotencyKeyId: number | null
+  totalGuest: number | null
 }
 
 export type BookingSumAggregateOutputType = {
@@ -40,6 +41,7 @@ export type BookingSumAggregateOutputType = {
   hotelid: number | null
   bookingAmount: number | null
   idempotencyKeyId: number | null
+  totalGuest: number | null
 }
 
 export type BookingMinAggregateOutputType = {
@@ -51,6 +53,7 @@ export type BookingMinAggregateOutputType = {
   bookingAmount: number | null
   status: $Enums.BookingStatus | null
   idempotencyKeyId: number | null
+  totalGuest: number | null
 }
 
 export type BookingMaxAggregateOutputType = {
@@ -62,6 +65,7 @@ export type BookingMaxAggregateOutputType = {
   bookingAmount: number | null
   status: $Enums.BookingStatus | null
   idempotencyKeyId: number | null
+  totalGuest: number | null
 }
 
 export type BookingCountAggregateOutputType = {
@@ -73,6 +77,7 @@ export type BookingCountAggregateOutputType = {
   bookingAmount: number
   status: number
   idempotencyKeyId: number
+  totalGuest: number
   _all: number
 }
 
@@ -83,6 +88,7 @@ export type BookingAvgAggregateInputType = {
   hotelid?: true
   bookingAmount?: true
   idempotencyKeyId?: true
+  totalGuest?: true
 }
 
 export type BookingSumAggregateInputType = {
@@ -91,6 +97,7 @@ export type BookingSumAggregateInputType = {
   hotelid?: true
   bookingAmount?: true
   idempotencyKeyId?: true
+  totalGuest?: true
 }
 
 export type BookingMinAggregateInputType = {
@@ -102,6 +109,7 @@ export type BookingMinAggregateInputType = {
   bookingAmount?: true
   status?: true
   idempotencyKeyId?: true
+  totalGuest?: true
 }
 
 export type BookingMaxAggregateInputType = {
@@ -113,6 +121,7 @@ export type BookingMaxAggregateInputType = {
   bookingAmount?: true
   status?: true
   idempotencyKeyId?: true
+  totalGuest?: true
 }
 
 export type BookingCountAggregateInputType = {
@@ -124,6 +133,7 @@ export type BookingCountAggregateInputType = {
   bookingAmount?: true
   status?: true
   idempotencyKeyId?: true
+  totalGuest?: true
   _all?: true
 }
 
@@ -222,6 +232,7 @@ export type BookingGroupByOutputType = {
   bookingAmount: number
   status: $Enums.BookingStatus
   idempotencyKeyId: number | null
+  totalGuest: number
   _count: BookingCountAggregateOutputType | null
   _avg: BookingAvgAggregateOutputType | null
   _sum: BookingSumAggregateOutputType | null
@@ -256,6 +267,7 @@ export type BookingWhereInput = {
   bookingAmount?: Prisma.IntFilter<"Booking"> | number
   status?: Prisma.EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
   idempotencyKeyId?: Prisma.IntNullableFilter<"Booking"> | number | null
+  totalGuest?: Prisma.IntFilter<"Booking"> | number
   idempotencyKey?: Prisma.XOR<Prisma.IdempotencyKeyNullableScalarRelationFilter, Prisma.IdempotencyKeyWhereInput> | null
 }
 
@@ -268,6 +280,7 @@ export type BookingOrderByWithRelationInput = {
   bookingAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   idempotencyKeyId?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalGuest?: Prisma.SortOrder
   idempotencyKey?: Prisma.IdempotencyKeyOrderByWithRelationInput
 }
 
@@ -283,6 +296,7 @@ export type BookingWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Booking"> | Date | string
   bookingAmount?: Prisma.IntFilter<"Booking"> | number
   status?: Prisma.EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
+  totalGuest?: Prisma.IntFilter<"Booking"> | number
   idempotencyKey?: Prisma.XOR<Prisma.IdempotencyKeyNullableScalarRelationFilter, Prisma.IdempotencyKeyWhereInput> | null
 }, "id" | "idempotencyKeyId">
 
@@ -295,6 +309,7 @@ export type BookingOrderByWithAggregationInput = {
   bookingAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   idempotencyKeyId?: Prisma.SortOrderInput | Prisma.SortOrder
+  totalGuest?: Prisma.SortOrder
   _count?: Prisma.BookingCountOrderByAggregateInput
   _avg?: Prisma.BookingAvgOrderByAggregateInput
   _max?: Prisma.BookingMaxOrderByAggregateInput
@@ -314,6 +329,7 @@ export type BookingScalarWhereWithAggregatesInput = {
   bookingAmount?: Prisma.IntWithAggregatesFilter<"Booking"> | number
   status?: Prisma.EnumBookingStatusWithAggregatesFilter<"Booking"> | $Enums.BookingStatus
   idempotencyKeyId?: Prisma.IntNullableWithAggregatesFilter<"Booking"> | number | null
+  totalGuest?: Prisma.IntWithAggregatesFilter<"Booking"> | number
 }
 
 export type BookingCreateInput = {
@@ -323,6 +339,8 @@ export type BookingCreateInput = {
   updatedAt?: Date | string
   bookingAmount: number
   status?: $Enums.BookingStatus
+  idempotencyKeyId?: number | null
+  totalGuest: number
   idempotencyKey?: Prisma.IdempotencyKeyCreateNestedOneWithoutBookingInput
 }
 
@@ -335,6 +353,8 @@ export type BookingUncheckedCreateInput = {
   bookingAmount: number
   status?: $Enums.BookingStatus
   idempotencyKeyId?: number | null
+  totalGuest: number
+  idempotencyKey?: Prisma.IdempotencyKeyUncheckedCreateNestedOneWithoutBookingInput
 }
 
 export type BookingUpdateInput = {
@@ -344,6 +364,8 @@ export type BookingUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookingAmount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  idempotencyKeyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalGuest?: Prisma.IntFieldUpdateOperationsInput | number
   idempotencyKey?: Prisma.IdempotencyKeyUpdateOneWithoutBookingNestedInput
 }
 
@@ -356,6 +378,8 @@ export type BookingUncheckedUpdateInput = {
   bookingAmount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   idempotencyKeyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalGuest?: Prisma.IntFieldUpdateOperationsInput | number
+  idempotencyKey?: Prisma.IdempotencyKeyUncheckedUpdateOneWithoutBookingNestedInput
 }
 
 export type BookingCreateManyInput = {
@@ -367,6 +391,7 @@ export type BookingCreateManyInput = {
   bookingAmount: number
   status?: $Enums.BookingStatus
   idempotencyKeyId?: number | null
+  totalGuest: number
 }
 
 export type BookingUpdateManyMutationInput = {
@@ -376,6 +401,8 @@ export type BookingUpdateManyMutationInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookingAmount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  idempotencyKeyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalGuest?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BookingUncheckedUpdateManyInput = {
@@ -387,6 +414,7 @@ export type BookingUncheckedUpdateManyInput = {
   bookingAmount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
   idempotencyKeyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalGuest?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BookingCountOrderByAggregateInput = {
@@ -398,6 +426,7 @@ export type BookingCountOrderByAggregateInput = {
   bookingAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   idempotencyKeyId?: Prisma.SortOrder
+  totalGuest?: Prisma.SortOrder
 }
 
 export type BookingAvgOrderByAggregateInput = {
@@ -406,6 +435,7 @@ export type BookingAvgOrderByAggregateInput = {
   hotelid?: Prisma.SortOrder
   bookingAmount?: Prisma.SortOrder
   idempotencyKeyId?: Prisma.SortOrder
+  totalGuest?: Prisma.SortOrder
 }
 
 export type BookingMaxOrderByAggregateInput = {
@@ -417,6 +447,7 @@ export type BookingMaxOrderByAggregateInput = {
   bookingAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   idempotencyKeyId?: Prisma.SortOrder
+  totalGuest?: Prisma.SortOrder
 }
 
 export type BookingMinOrderByAggregateInput = {
@@ -428,6 +459,7 @@ export type BookingMinOrderByAggregateInput = {
   bookingAmount?: Prisma.SortOrder
   status?: Prisma.SortOrder
   idempotencyKeyId?: Prisma.SortOrder
+  totalGuest?: Prisma.SortOrder
 }
 
 export type BookingSumOrderByAggregateInput = {
@@ -436,6 +468,7 @@ export type BookingSumOrderByAggregateInput = {
   hotelid?: Prisma.SortOrder
   bookingAmount?: Prisma.SortOrder
   idempotencyKeyId?: Prisma.SortOrder
+  totalGuest?: Prisma.SortOrder
 }
 
 export type BookingNullableScalarRelationFilter = {
@@ -473,23 +506,7 @@ export type BookingCreateNestedOneWithoutIdempotencyKeyInput = {
   connect?: Prisma.BookingWhereUniqueInput
 }
 
-export type BookingUncheckedCreateNestedOneWithoutIdempotencyKeyInput = {
-  create?: Prisma.XOR<Prisma.BookingCreateWithoutIdempotencyKeyInput, Prisma.BookingUncheckedCreateWithoutIdempotencyKeyInput>
-  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutIdempotencyKeyInput
-  connect?: Prisma.BookingWhereUniqueInput
-}
-
 export type BookingUpdateOneWithoutIdempotencyKeyNestedInput = {
-  create?: Prisma.XOR<Prisma.BookingCreateWithoutIdempotencyKeyInput, Prisma.BookingUncheckedCreateWithoutIdempotencyKeyInput>
-  connectOrCreate?: Prisma.BookingCreateOrConnectWithoutIdempotencyKeyInput
-  upsert?: Prisma.BookingUpsertWithoutIdempotencyKeyInput
-  disconnect?: Prisma.BookingWhereInput | boolean
-  delete?: Prisma.BookingWhereInput | boolean
-  connect?: Prisma.BookingWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BookingUpdateToOneWithWhereWithoutIdempotencyKeyInput, Prisma.BookingUpdateWithoutIdempotencyKeyInput>, Prisma.BookingUncheckedUpdateWithoutIdempotencyKeyInput>
-}
-
-export type BookingUncheckedUpdateOneWithoutIdempotencyKeyNestedInput = {
   create?: Prisma.XOR<Prisma.BookingCreateWithoutIdempotencyKeyInput, Prisma.BookingUncheckedCreateWithoutIdempotencyKeyInput>
   connectOrCreate?: Prisma.BookingCreateOrConnectWithoutIdempotencyKeyInput
   upsert?: Prisma.BookingUpsertWithoutIdempotencyKeyInput
@@ -506,6 +523,8 @@ export type BookingCreateWithoutIdempotencyKeyInput = {
   updatedAt?: Date | string
   bookingAmount: number
   status?: $Enums.BookingStatus
+  idempotencyKeyId?: number | null
+  totalGuest: number
 }
 
 export type BookingUncheckedCreateWithoutIdempotencyKeyInput = {
@@ -516,6 +535,8 @@ export type BookingUncheckedCreateWithoutIdempotencyKeyInput = {
   updatedAt?: Date | string
   bookingAmount: number
   status?: $Enums.BookingStatus
+  idempotencyKeyId?: number | null
+  totalGuest: number
 }
 
 export type BookingCreateOrConnectWithoutIdempotencyKeyInput = {
@@ -541,6 +562,8 @@ export type BookingUpdateWithoutIdempotencyKeyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookingAmount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  idempotencyKeyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalGuest?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type BookingUncheckedUpdateWithoutIdempotencyKeyInput = {
@@ -551,6 +574,8 @@ export type BookingUncheckedUpdateWithoutIdempotencyKeyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookingAmount?: Prisma.IntFieldUpdateOperationsInput | number
   status?: Prisma.EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
+  idempotencyKeyId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalGuest?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -564,6 +589,7 @@ export type BookingSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   bookingAmount?: boolean
   status?: boolean
   idempotencyKeyId?: boolean
+  totalGuest?: boolean
   idempotencyKey?: boolean | Prisma.Booking$idempotencyKeyArgs<ExtArgs>
 }, ExtArgs["result"]["booking"]>
 
@@ -578,9 +604,10 @@ export type BookingSelectScalar = {
   bookingAmount?: boolean
   status?: boolean
   idempotencyKeyId?: boolean
+  totalGuest?: boolean
 }
 
-export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "hotelid" | "createdAt" | "updatedAt" | "bookingAmount" | "status" | "idempotencyKeyId", ExtArgs["result"]["booking"]>
+export type BookingOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "hotelid" | "createdAt" | "updatedAt" | "bookingAmount" | "status" | "idempotencyKeyId" | "totalGuest", ExtArgs["result"]["booking"]>
 export type BookingInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   idempotencyKey?: boolean | Prisma.Booking$idempotencyKeyArgs<ExtArgs>
 }
@@ -599,6 +626,7 @@ export type $BookingPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     bookingAmount: number
     status: $Enums.BookingStatus
     idempotencyKeyId: number | null
+    totalGuest: number
   }, ExtArgs["result"]["booking"]>
   composites: {}
 }
@@ -977,6 +1005,7 @@ export interface BookingFieldRefs {
   readonly bookingAmount: Prisma.FieldRef<"Booking", 'Int'>
   readonly status: Prisma.FieldRef<"Booking", 'BookingStatus'>
   readonly idempotencyKeyId: Prisma.FieldRef<"Booking", 'Int'>
+  readonly totalGuest: Prisma.FieldRef<"Booking", 'Int'>
 }
     
 
