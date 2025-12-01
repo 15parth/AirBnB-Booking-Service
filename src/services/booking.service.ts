@@ -1,13 +1,14 @@
 import { CreateBookingDTO } from "../dto/booking.dto";
-import { confirmBooking, createBooking, createIdempotencyKey, finalizeIdempotencyKey, getIdempotencykey } from "../repositories/booking.repository";
-import { NotFoundError } from "../utils/errors/app.error";
+import { confirmBooking, createBooking, createIdempotencyKey, finalizeIdempotencyKey, getIdempotencykeyWithLock } from "../repositories/booking.repository";
+import { BadRequestError, NotFoundError } from "../utils/errors/app.error";
 import { generateIdempotencyKey } from "../utils/generateIdempotency";
+import prismaClient from '../prisma/client'
 
 export async function createBookingService(createBookingDTO: CreateBookingDTO){
  
     const booking = await createBooking({
         userId : createBookingDTO.userId,
-        hotelid : createBookingDTO.hotelId,
+        hotelid : createBookingDTO.hotelid,
         totalGuest: createBookingDTO.totalGuest,
         bookingAmount : createBookingDTO.bookingAmount
     });
@@ -24,17 +25,24 @@ export async function createBookingService(createBookingDTO: CreateBookingDTO){
 }
 
 
-export async function confirmBookingService(idempotencyKey:string) {
- const idempotencyKeyData = await getIdempotencykey(idempotencyKey);
- 
- if(!idempotencyKeyData){
-    throw new NotFoundError('Idempotency key not found');
- }
+export async function confirmBookingService(idempotencyKey: string) {
+    return await prismaClient.$transaction(async (tx) => {
+        const idempotencyKeyData = await getIdempotencykeyWithLock(idempotencyKey, tx);
 
- const booking = await confirmBooking(idempotencyKeyData.bookingId);
+        if (!idempotencyKeyData || !idempotencyKeyData.bookingId) {
+            throw new NotFoundError('Idempotency key not found');
+        }
 
- await finalizeIdempotencyKey(idempotencyKey);
+        if(idempotencyKeyData.finalized){
+            throw new BadRequestError('idempotency key already exists');
+        }
 
- return booking;
+        const booking = await confirmBooking(tx,idempotencyKeyData.bookingId);
+
+        await finalizeIdempotencyKey(tx,idempotencyKey);
+
+        return booking;
+    })
+
 
 }
